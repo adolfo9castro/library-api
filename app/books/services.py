@@ -1,7 +1,6 @@
 from app.models import Books
 from app.database import db
 
-# Servicio para obtener todos los autores
 
 def create_book(data):
     new_book = Books(

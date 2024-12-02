@@ -25,30 +25,26 @@ def test_create_book_with_mock():
         "read": True
     }
 
-    # Simulamos el comportamiento del modelo `Books`
+
     with patch("app.books.services.Books") as MockBooks, \
          patch("app.books.services.db.session") as mock_session:
 
-        # Configuramos el comportamiento de la instancia simulada
         mock_book_instance = MagicMock()
-        mock_book_instance.title = book_data["title"]  # Establecemos explícitamente el valor esperado
+        mock_book_instance.title = book_data["title"] 
         MockBooks.return_value = mock_book_instance
 
-        # Llamamos a la función con los datos simulados
         response = create_book(book_data)
 
-        # Validamos que la instancia del libro fue creada con los datos correctos
         MockBooks.assert_called_once_with(
             title="On the Road",
             author="Jack Kerouac",
             read=True
         )
 
-        # Verificamos que se agregaron y confirmaron los cambios en la sesión de la base de datos
+
         mock_session.add.assert_called_once_with(mock_book_instance)
         mock_session.commit.assert_called_once()
 
-        # Verificamos la respuesta de la función
         assert response["message"] == "New book On the Road was created"
 
 def test_add_book_validation_error(client):

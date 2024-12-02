@@ -6,7 +6,6 @@ def init_extensions(app):
         "origins": {os.getenv('ORIGINS')},
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         "allow_headers": ["Authorization", "Content-Type"],
-        "supports_credentials": True  # Permite el envío de cookies si es necesario
+        "supports_credentials": True
     }})
-    cors.init_app(app)  # Habilitar CORS
-    #jwt.init_app(app)
+    cors.init_app(app)

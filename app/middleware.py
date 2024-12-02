@@ -12,6 +12,6 @@ def init_middlewares(app):
 
     @app.before_request
     def check_headers():
-        if request.method != "GET":
+        if request.method in ["POST", "PUT"]:
             if request.headers.get("Content-Type") != "application/json":
                 return jsonify({"Error": "Invalid Content Type"}), 400

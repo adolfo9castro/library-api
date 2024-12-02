@@ -10,15 +10,15 @@ def app():
     app = create_app()
     app.config.update({
         "TESTING": True,
-        "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",  # Base de datos en memoria para pruebas
+        "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",  
         "SQLALCHEMY_TRACK_MODIFICATIONS": False,
     })
 
     with app.app_context():
-        db.create_all()  # Crear las tablas necesarias en memoria
-        yield app  # Proporciona la aplicación para las pruebas
+        db.create_all()  
+        yield app  
         """ db.session.remove()
-        db.drop_all()  """ # Limpia la base de datos después de las pruebas
+        db.drop_all()  """
 
 
 @pytest.fixture
